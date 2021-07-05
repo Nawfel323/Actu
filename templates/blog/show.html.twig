@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+	<article>
+		<h2>{{ article.title }}</h2>
+
+		<div class="metadata">Ecrit le
+			{{ article.createdAt | date('d/m/y') }}
+			à
+			{{ article.createdAt | date ('H:i') }}
+
+			dans la catégorie Jeux Vidéo</div>
+
+
+		<div class="content">
+			<img src="{{ article.image }}" alt="">
+		</div>
+
+		{{ article.content | raw }}
+
+		<a href="{{path('blog_edit', {'id': article.id})}}" class="btn btn-info">Modifier l'article</a>
+
+
+		<article>
+
+
+		{% endblock %}
