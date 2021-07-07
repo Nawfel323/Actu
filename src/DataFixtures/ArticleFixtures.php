@@ -3,36 +3,51 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class ArticleFixtures extends Fixture
 {
+
+
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        //incrémentation de (fausses données) pour les articles
-        for ($i = 1; $i <= 10; $i++) {
-            # code...
-            $article = new Article;
-            $article->setTitle("Titre de l'article n°$i")
-                ->setContent("<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                 galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s 
-                  with the release of Letraset sheets containing Lorem Ipsum passages,
-                 and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>")
-                ->setImage("http://placehold.it/450x200")
-                ->setCreatedAt(new \DateTime());
+        $faker = Factory::create('fr_FR');
 
 
+        //3 catégories par fake
+        for ($i = 1; $i <= 3; $i++) {
+            $category = new Category();
+
+            $category->setTitle($faker->sentence)
+                ->setDescription($faker->paragraph());
 
 
-            //prépare les articles a "persister"  dans le temps
-            $manager->persist($article);
+            $manager->persist($category);
+
+            //créer 4 et 6 articles env
+            //incrémentation de (fausses données) pour les articles
+            for ($j = 1; $j <= mt_rand(4, 6); $j++) {
+
+
+                //$content = '<p>' . join($faker->paragraphs(1)) . '</p>';
+
+                $article = new Article;
+                $article->setTitle($faker->sentence())
+                    ->setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eros dolor,
+                     dignissim vel ex consectetur, varius feugiat diam. Sed ornare in arcu vitae sagittis. 
+                     Integer enim justo, pulvinar eget elit at, imperdiet efficitur ante. Suspendisse vel tempus ante, non congue sapien.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sapien nulla.") //or $content
+                    ->setImage("http://placehold.it/450x200") //or $faker->imageUrl()
+                    ->setCreatedAt($faker->dateTimeBetween('-6 months'))
+                    ->setCategory($category);
+
+                //prépare les articles a "persister"  dans le temps
+                $manager->persist($article);
+            }
         }
-
         //Les artciles sont désormais existant dans la bdd
         $manager->flush();
     }

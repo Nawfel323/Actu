@@ -10,47 +10,51 @@
 		{% for article in articles %}
 
 			<articles>
-				<div class="d-flex flex-wrap">
+
+				<div class="w-50 p-3">
 
 
-					<div class="card mb-3">
+					<div class="card mb-4">
 						<h3 class="card-header">{{ article.title }}</h3>
 
 						<div class="card-body">
-							<div class="metadata">Ecrit le
-								{{ article.createdAt | date('d/m/y') }}
+							<div class="metadata">
+								Ecrit le
+								<strong>{{ article.createdAt | date('d/m/y') }}</strong>
 								à
-								{{ article.createdAt | date ('H:i') }}
-
-								dans la catégorie Jeux Vidéo</div>
-
+								<strong>{{ article.createdAt | date ('H:i') }}</strong>
+								dans la catégorie
+								<strong>{{article.category.title}}</strong>
+							</strong>
 						</div>
-						<img src="{{ article.image }}" alt="" width="450" height="200">
 
 
-						<div class="card-body">
-							{{ article.content | length > 50 ? article.content|slice(0, 50) ~ '...' : article.content  }}
-						</div>
-						<br><br>
-						<a href="{{path('blog_show', {'id': article.id})}}" class="btn btn-primary">Lire la suite</a>
-
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Par Admin</li>
+					</div>
+					<img src="{{ article.image }}" alt="">
 
 
-						</ul>
+					<div class="card-body ">
 
+						{{ article.content | length > 50 ? article.content|slice(0, 50) ~ '...' : article.content  }}
 					</div>
 
 
+					<a href="{{path('blog_show', {'id': article.id})}}" class="btn btn-primary">Lire la suite</a>
+
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Par Admin</li>
+
+
+					</ul>
+
 				</div>
-			</articles>
 
 
-		{% endfor %}
+			</div>
+		</articles>
 
 
-	</section>
+	{% endfor %}
 
 
-{% endblock %}
+</section>{% endblock %}

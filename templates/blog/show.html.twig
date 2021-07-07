@@ -6,24 +6,25 @@
 	<article>
 		<h2>{{ article.title }}</h2>
 
-		<div class="metadata">Ecrit le
-			{{ article.createdAt | date('d/m/y') }}
+		<div class="metadata">
+			Ecrit le
+			<strong>{{ article.createdAt | date('d/m/y') }}</strong>
 			à
-			{{ article.createdAt | date ('H:i') }}
-
-			dans la catégorie Jeux Vidéo</div>
-
-
-		<div class="content">
-			<img src="{{ article.image }}" alt="">
-		</div>
-
+			<strong>{{ article.createdAt | date ('H:i') }}</strong>
+			dans la catégorie
+			<strong>{{article.category.title}}</strong>
+		</strong>
+	</div>
+	<div class="content">
+		<img src="{{ article.image }}" alt="">
+	</div>
+	<br>
+	<div class="content">
 		{{ article.content | raw }}
+	</div>
+	<br>
 
-		<a href="{{path('blog_edit', {'id': article.id})}}" class="btn btn-info">Modifier l'article</a>
+	<a href="{{path('blog_edit', {'id': article.id})}}" class="btn btn-info">Modifier l'article</a>
 
-
-		<article>
-
-
-		{% endblock %}
+	<article>
+	{% endblock %}
