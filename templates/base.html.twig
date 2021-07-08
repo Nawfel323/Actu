@@ -7,7 +7,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-																												           and uncomment the following Encore helpers to start using Symfony UX #}
+																																																																																																																           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			{#{{ encore_entry_link_tags('app') }}#}
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -29,47 +29,35 @@
 					<div class="collapse navbar-collapse" id="navbarColor01">
 						<ul class="navbar-nav me-auto">
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path ('blog')}}">Articles
 
+								<a class="nav-link" href="{{ path ('blog')}}">Articles</a>
 
-									<span class="visually-hidden">(current)</span>
-								</a>
+								<span class="visually-hidden">(current)</span>
 							</li>
-							<li class="nav-item">
+						</a>
+					</li>
+					<li class="nav-item">
+						{% if not app.user %}
+
+							{% elseif app.user %}
 								<a class="nav-link" href="{{ path ('blog_create')}}">Créer articles</a>
 
-							</li>
-						</ul>
-						<form class="d-flex">
-							<input class="form-control me-sm-2" type="text" placeholder="Search">
-							<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-						</form>
-						<ul class="navbar-nav ms-auto ms-md-0">
-							<li class="nav-item dropdown user-dropdown">
-								<a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chikh Nawfel
-									<i class="fas fa-user fa-fw"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end aria-labelledby=" userdropdown>
-									<a class="dropdown-item" href="#">Settings</a>
-									<a class="dropdown-item" href="#">Activity Log</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="/login">
-										<i class="fas fa-sign-out-alt"></i>
-										<span class="ms-2">Logout</span>
-									</a>
-								</div>
-							</li>
-						</ul>
+						{% endif %}
 
-					</div>
-				</div>
-			</nav>
 
-			{% block javascripts %}
-				{#{{ encore_entry_script_tags('app') }}#}
-			{% endblock %}
+					</li>
+				</li>
+			</ul>
+
+
+			<ul class="navbar-nav ms-auto ms-md-0">
+				{% if not app.user %}
+					<a class="dropdown-item" href="{{ path ('security_login')}}">Connexion</a>
+					<a class="dropdown-item" href="{{ path ('security_registration')}}">Inscription</a>
+				{% else %}
+					<a class="dropdown-item" href="{{ path ('security_logout')}}">Déconnexion</a>
+				{% endif %}
+			</ul>
 		</body>
 	</head>
-
-	{% block body %}{% endblock %}
-</html></body></html>
+</html></li></li></body></head></html></div></body></head></html> </li></body></head></html></ul></body></head></html></div></body></head></html></div></nav>{% block javascripts %}{#{{ encore_entry_script_tags('app') }}#}{% endblock %}</body></head>{% block body %}{% endblock %}</html></body></html>

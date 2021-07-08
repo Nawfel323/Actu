@@ -23,8 +23,13 @@
 		{{ article.content | raw }}
 	</div>
 	<br>
+	{% if not app.user %}
 
-	<a href="{{path('blog_edit', {'id': article.id})}}" class="btn btn-info">Modifier l'article</a>
+		{% elseif app.user %}
+
+			<a href="{{path('blog_edit', {'id': article.id})}}" class="btn btn-info">Modifier l'article</a>
+	{% endif %}
+
 
 	<article>
 	{% endblock %}
